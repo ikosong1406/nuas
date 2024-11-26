@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import BackendApi from "../components/BackendApi";
 import Header from "../components/Header";
 import cargif from "../assets/team.jpeg";
+import axios from "axios";
+import BackendApi from "../components/BackendApi";
 
-const NewsPage = () => {
-  const [newsData, setNewsData] = useState([]);
+const Position = () => {
+  const [leadership, setLeadership] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -18,9 +18,8 @@ const NewsPage = () => {
   useEffect(() => {
     const fetchLeaders = async () => {
       try {
-        const response = await axios.get(`${BackendApi}/allNews`);
-        const fetched = response.data;
-        setNewsData(fetched.reverse());
+        const response = await axios.get(`${BackendApi}/allPosition`);
+        setLeadership(response.data);
       } catch (error) {
         console.error("Error fetching position:", error);
       }
@@ -30,7 +29,7 @@ const NewsPage = () => {
   }, []);
   return (
     <Header>
-      <div className="bg-white text-gray-900 font-sans pt-10">
+      <div className="bg-white text-gray-900 font-sans pt-16">
         {/* Hero Section */}
         <section className="relative h-96">
           <img
@@ -39,33 +38,35 @@ const NewsPage = () => {
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center text-white p-8">
-            <h1 className="text-3xl font-bold mb-4">News from NUAS</h1>
+            <h1 className="text-3xl font-bold mb-4">
+              56th National Executive Council (NEC)
+            </h1>
           </div>
         </section>
 
-        {/* News Section */}
-        <section className="pt-4">
-          <div className="max-w-screen-xl mx-auto px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {newsData.map((news) => (
-                <div
-                  key={news.id}
-                  className="bg-gray-100 p-6 rounded-lg shadow-lg"
-                >
-                  <img
-                    src={news.cover}
-                    alt={news.heading}
-                    className="w-full h-48 object-cover rounded-lg mb-4"
-                  />
-                  <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                    {news.heading}
-                  </h2>
-                  <p className="text-gray-700">{news.body}</p>
-                </div>
-              ))}
+        <h3 className="text-3xl font-bold mb-4 text-gold mt-8 text-center">
+          Our Leadership
+        </h3>
+
+        {/* Leadership Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {leadership.map((leader, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-lg text-center"
+            >
+              <img
+                src={leader.image}
+                alt={leader.name}
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+              />
+              <h4 className="text-xl font-semibold text-gold mb-2">
+                {leader.name}
+              </h4>
+              <p className="text-lg text-gray-700">{leader.position}</p>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
 
         {/* Footer Section */}
         <footer className="bg-gray-900 text-black py-8">
@@ -81,4 +82,4 @@ const NewsPage = () => {
   );
 };
 
-export default NewsPage;
+export default Position;

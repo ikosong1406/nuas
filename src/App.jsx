@@ -8,6 +8,9 @@ import News from "./pages/News";
 import NewNews from "./pages/NewNews";
 import EditNews from "./pages/AllNews";
 import Leadership from "./pages/Leadership";
+import About from "./pages/About";
+import Position from "./pages/Position";
+import Contact from "./pages/Contact";
 
 function App() {
   const Layout = ({ children }) => (
@@ -28,22 +31,11 @@ function App() {
     <>
       <Router>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Layout>
-                <Home />
-              </Layout>
-            }
-          />
-          <Route
-            path="/news"
-            element={
-              <Layout>
-                <News />
-              </Layout>
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/news" element={<News />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/position" element={<Position />} />
+          <Route path="/contact" element={<Contact />} />
           <Route
             path="/cc/addnews"
             element={
