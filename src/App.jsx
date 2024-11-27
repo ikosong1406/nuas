@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
+import EditContact from "./pages/EditContact";
 
 function App() {
   const Layout1 = ({ children }) => (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/addnews" element={<NewNews />} />
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/allnews" element={<EditNews />} />
+          <Route path="/editcontact" element={<EditContact />} />
         </Routes>
       </Router>
     </>

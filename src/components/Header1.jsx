@@ -62,6 +62,13 @@ const Header1 = ({ children }) => {
               <span>Leadership</span>
             </NavLink>
             <NavLink
+              to="/editcontact"
+              className="block hover:bg-gold p-2 rounded flex items-center space-x-2 text-white text-lg font-semibold"
+              activeClassName="bg-orange"
+            >
+              <span>Edit Contact</span>
+            </NavLink>
+            <NavLink
               to="/addnews"
               className="block hover:bg-gold p-2 rounded flex items-center space-x-2 text-white text-lg font-semibold"
               activeClassName="bg-orange"
