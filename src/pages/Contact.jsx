@@ -105,7 +105,7 @@ const Contact = () => {
                 <FaFacebook />
               </a>
               <a
-                href="https://twitter.com"
+                href="https://wa.me/2349168239963"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-green"

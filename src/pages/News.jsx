@@ -3,10 +3,13 @@ import axios from "axios";
 import BackendApi from "../components/BackendApi";
 import Header from "../components/Header";
 import cargif from "../assets/team.jpeg";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NewsPage = () => {
   const [newsData, setNewsData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedNews, setSelectedNews] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,19 +25,35 @@ const NewsPage = () => {
         const fetched = response.data;
         setNewsData(fetched.reverse());
       } catch (error) {
-        console.error("Error fetching position:", error);
+        console.error("Error fetching news:", error);
       }
     };
 
     fetchLeaders();
   }, []);
+
+  const handleReadMore = (news) => {
+    setSelectedNews(news);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedNews(null);
+  };
+
+  const handleShare = (heading, url) => {
+    const shareText = `Check out this news: "${heading}"\nRead more here: ${url}`;
+    navigator.clipboard.writeText(shareText);
+    toast.success("News link copied to clipboard! Share it with your friends.");
+  };
+
   return (
     <Header>
       <div className="bg-white text-gray-900 font-sans pt-10">
+        <ToastContainer />
         {/* Hero Section */}
         <section className="relative h-96">
           <img
-            src={cargif} // Ensure this path is correct
+            src={cargif}
             alt="Background GIF"
             className="absolute top-0 left-0 w-full h-full object-cover"
           />
@@ -60,15 +79,59 @@ const NewsPage = () => {
                   <h2 className="text-xl font-semibold text-gray-800 mb-2">
                     {news.heading}
                   </h2>
-                  <p className="text-gray-700">{news.body}</p>
+                  <p className="text-gray-700 line-clamp-3">{news.body}</p>
+                  <button
+                    onClick={() => handleReadMore(news)}
+                    className="mt-2 text-bluey font-semibold"
+                  >
+                    Read More
+                  </button>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
+        {/* Modal */}
+        {selectedNews && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
+            <div className="bg-white max-w-2xl w-full mx-4 rounded-lg shadow-lg overflow-hidden">
+              <div className="p-6">
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                  {selectedNews.heading}
+                </h2>
+                <img
+                  src={selectedNews.cover}
+                  alt={selectedNews.heading}
+                  className="w-full h-64 object-cover rounded-lg mb-4"
+                />
+                <p className="text-gray-700">{selectedNews.body}</p>
+              </div>
+              <div className="flex justify-between items-center p-6 border-t">
+                <button
+                  onClick={handleCloseModal}
+                  className="text-red font-semibold"
+                >
+                  Close
+                </button>
+                <button
+                  onClick={() =>
+                    handleShare(
+                      selectedNews.heading,
+                      `${window.location.origin}/news/${selectedNews.id}`
+                    )
+                  }
+                  className="text-bluey font-semibold"
+                >
+                  Share
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Footer Section */}
-        <footer className="bg-gray-900 text-black py-8">
+        <footer className="bg-gray-900 text-white py-8">
           <div className="max-w-screen-xl mx-auto px-4 text-center">
             <p>
               &copy; {new Date().getFullYear()} National Union of Andoni

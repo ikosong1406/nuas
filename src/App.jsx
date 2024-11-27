@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Header from "./components/Header";
-import Header1 from "./components/Header1";
 import Home from "./pages/Home";
 import News from "./pages/News";
 import NewNews from "./pages/NewNews";
@@ -15,13 +13,6 @@ import Login from "./pages/Login";
 import EditContact from "./pages/EditContact";
 
 function App() {
-  const Layout1 = ({ children }) => (
-    <>
-      <Header1 />
-      {children}
-    </>
-  );
-
   return (
     <>
       <Router>
