@@ -29,30 +29,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/position" element={<Position />} />
           <Route path="/contact" element={<Contact />} />
-          <Route
-            path="/addnews"
-            element={
-              <Layout1>
-                <NewNews />
-              </Layout1>
-            }
-          />
-          <Route
-            path="/leadership"
-            element={
-              <Layout1>
-                <Leadership />
-              </Layout1>
-            }
-          />
-          <Route
-            path="/allnews"
-            element={
-              <Layout1>
-                <EditNews />
-              </Layout1>
-            }
-          />
+          <Route path="/addnews" element={<NewNews />} />
+          <Route path="/leadership" element={<Leadership />} />
+          <Route path="/allnews" element={<EditNews />} />
         </Routes>
       </Router>
     </>

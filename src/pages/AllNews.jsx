@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import BackendApi from "../components/BackendApi";
 import { toast } from "react-toastify";
+import Header1 from "../components/Header1";
 
 const EditNews = () => {
   const [news, setNews] = useState([]);
@@ -47,41 +48,45 @@ const EditNews = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-24 p-6">
-      <h2 className="text-2xl font-bold text-gold mb-6">Edit News</h2>
-      {isLoading ? (
-        <p>Loading news...</p>
-      ) : news.length === 0 ? (
-        <p>No news available.</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {news.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white p-6 rounded-lg shadow-lg text-center"
-            >
-              {item.cover && (
-                <img
-                  src={item.cover}
-                  alt={item.heading}
-                  className="w-full h-32 object-cover rounded-lg mb-4"
-                />
-              )}
-              <h3 className="text-xl font-bold text-gray-800 mb-2">
-                {item.heading}
-              </h3>
-              <p className="text-gray-600 mb-4">{item.body.slice(0, 100)}...</p>
-              <button
-                onClick={() => deleteNews(item._id)}
-                className="bg-red text-white px-4 py-2 rounded hover:bg-red-600"
+    <Header1>
+      <div className="bg-gray-100 min-h-screen pt-24 p-6">
+        <h2 className="text-2xl font-bold text-gold mb-6">Edit News</h2>
+        {isLoading ? (
+          <p>Loading news...</p>
+        ) : news.length === 0 ? (
+          <p>No news available.</p>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {news.map((item) => (
+              <div
+                key={item._id}
+                className="bg-white p-6 rounded-lg shadow-lg text-center"
               >
-                Delete
-              </button>
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
+                {item.cover && (
+                  <img
+                    src={item.cover}
+                    alt={item.heading}
+                    className="w-full h-32 object-cover rounded-lg mb-4"
+                  />
+                )}
+                <h3 className="text-xl font-bold text-gray-800 mb-2">
+                  {item.heading}
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  {item.body.slice(0, 100)}...
+                </p>
+                <button
+                  onClick={() => deleteNews(item._id)}
+                  className="bg-red text-white px-4 py-2 rounded hover:bg-red-600"
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </Header1>
   );
 };
 

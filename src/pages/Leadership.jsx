@@ -3,6 +3,7 @@ import axios from "axios";
 import BackendApi from "../components/BackendApi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Header1 from "../components/Header1";
 
 const Leadership = () => {
   const [leadership, setLeadership] = useState([]);
@@ -85,83 +86,85 @@ const Leadership = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-24 p-6">
-      <ToastContainer />
-      <h2 className="text-2xl font-bold text-gold mb-6">Edit Leadership</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {leadership.map((leader) => (
-          <div
-            key={leader.id}
-            className="bg-white p-6 rounded-lg shadow-lg text-center"
-          >
-            <img
-              src={leader.image}
-              alt={leader.name}
-              className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
-            />
-            <h3 className="text-xl font-semibold text-gray-800 mb-2">
-              {leader.name}
-            </h3>
-            <p className="text-lg text-gray-700">{leader.position}</p>
-            <button
-              onClick={() => handleEditClick(leader)}
-              className="mt-4 bg-gold text-white px-4 py-2 rounded hover:bg-blue-600"
+    <Header1>
+      <div className="bg-gray-100 min-h-screen pt-24 p-6">
+        <ToastContainer />
+        <h2 className="text-2xl font-bold text-gold mb-6">Edit Leadership</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {leadership.map((leader) => (
+            <div
+              key={leader.id}
+              className="bg-white p-6 rounded-lg shadow-lg text-center"
             >
-              Edit
-            </button>
-          </div>
-        ))}
-      </div>
+              <img
+                src={leader.image}
+                alt={leader.name}
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+              />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                {leader.name}
+              </h3>
+              <p className="text-lg text-gray-700">{leader.position}</p>
+              <button
+                onClick={() => handleEditClick(leader)}
+                className="mt-4 bg-gold text-white px-4 py-2 rounded hover:bg-blue-600"
+              >
+                Edit
+              </button>
+            </div>
+          ))}
+        </div>
 
-      {/* Modal */}
-      {isModalOpen && selectedLeader && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg relative">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
-            >
-              &times;
-            </button>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">
-              Edit Leader
-            </h3>
-            <div className="space-y-4">
-              {/* Image Upload */}
-              <div>
-                {selectedLeader.image && (
-                  <img
-                    src={selectedLeader.image}
-                    alt={selectedLeader.name}
-                    className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+        {/* Modal */}
+        {isModalOpen && selectedLeader && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white w-full max-w-lg p-6 rounded-lg shadow-lg relative">
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute top-4 right-4 text-gray-600 hover:text-gray-800"
+              >
+                &times;
+              </button>
+              <h3 className="text-2xl font-bold text-gray-800 mb-4">
+                Edit Leader
+              </h3>
+              <div className="space-y-4">
+                {/* Image Upload */}
+                <div>
+                  {selectedLeader.image && (
+                    <img
+                      src={selectedLeader.image}
+                      alt={selectedLeader.name}
+                      className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+                    />
+                  )}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="block w-full"
                   />
-                )}
+                </div>
+                {/* Name */}
                 <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="block w-full"
+                  type="text"
+                  value={selectedLeader.name}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  className="w-full p-2 border border-gray-300 rounded"
+                  placeholder="Name"
                 />
               </div>
-              {/* Name */}
-              <input
-                type="text"
-                value={selectedLeader.name}
-                onChange={(e) => handleInputChange("name", e.target.value)}
-                className="w-full p-2 border border-gray-300 rounded"
-                placeholder="Name"
-              />
+              <button
+                onClick={saveChanges}
+                className="mt-6 bg-gold text-white px-4 py-2 rounded hover:bg-green-600"
+              >
+                Save
+              </button>
             </div>
-            <button
-              onClick={saveChanges}
-              className="mt-6 bg-gold text-white px-4 py-2 rounded hover:bg-green-600"
-            >
-              Save
-            </button>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </Header1>
   );
 };
 
