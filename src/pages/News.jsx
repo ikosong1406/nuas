@@ -3,8 +3,6 @@ import axios from "axios";
 import BackendApi from "../components/BackendApi";
 import Header from "../components/Header";
 import cargif from "../assets/team.jpeg";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const NewsPage = () => {
   const [newsData, setNewsData] = useState([]);
@@ -40,16 +38,30 @@ const NewsPage = () => {
     setSelectedNews(null);
   };
 
-  const handleShare = (heading, url) => {
-    const shareText = `Check out this news: "${heading}"\nRead more here: ${url}`;
-    navigator.clipboard.writeText(shareText);
-    toast.success("News link copied to clipboard! Share it with your friends.");
+  const handleShare = async (news) => {
+    const shareData = {
+      title: news.heading,
+      text: `Check out this news: ${news.heading}`,
+      url: `${window.location.origin}/news/${news.id}`,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        console.log("News shared successfully!");
+      } catch (error) {
+        console.error("Error sharing news:", error);
+      }
+    } else {
+      alert(
+        "Sharing not supported on this browser. Please copy the link manually."
+      );
+    }
   };
 
   return (
     <Header>
       <div className="bg-white text-gray-900 font-sans pt-10">
-        <ToastContainer />
         {/* Hero Section */}
         <section className="relative h-96">
           <img
@@ -82,7 +94,7 @@ const NewsPage = () => {
                   <p className="text-gray-700 line-clamp-3">{news.body}</p>
                   <button
                     onClick={() => handleReadMore(news)}
-                    className="mt-2 text-bluey font-semibold"
+                    className="mt-2 text-blue-600 font-semibold"
                   >
                     Read More
                   </button>
@@ -110,18 +122,13 @@ const NewsPage = () => {
               <div className="flex justify-between items-center p-6 border-t">
                 <button
                   onClick={handleCloseModal}
-                  className="text-red font-semibold"
+                  className="text-red-600 font-semibold"
                 >
                   Close
                 </button>
                 <button
-                  onClick={() =>
-                    handleShare(
-                      selectedNews.heading,
-                      `${window.location.origin}/news/${selectedNews.id}`
-                    )
-                  }
-                  className="text-bluey font-semibold"
+                  onClick={() => handleShare(selectedNews)}
+                  className="text-blue-600 font-semibold"
                 >
                   Share
                 </button>
