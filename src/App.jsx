@@ -13,13 +13,6 @@ import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 
 function App() {
-  const Layout = ({ children }) => (
-    <>
-      <Header />
-      {children}
-    </>
-  );
-
   const Layout1 = ({ children }) => (
     <>
       <Header1 />
@@ -37,7 +30,7 @@ function App() {
           <Route path="/position" element={<Position />} />
           <Route path="/contact" element={<Contact />} />
           <Route
-            path="/cc/addnews"
+            path="/addnews"
             element={
               <Layout1>
                 <NewNews />
@@ -45,7 +38,7 @@ function App() {
             }
           />
           <Route
-            path="/cc/leadership"
+            path="/leadership"
             element={
               <Layout1>
                 <Leadership />
@@ -53,7 +46,7 @@ function App() {
             }
           />
           <Route
-            path="/cc/allnews"
+            path="/allnews"
             element={
               <Layout1>
                 <EditNews />
