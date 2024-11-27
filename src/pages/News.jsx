@@ -94,7 +94,7 @@ const NewsPage = () => {
                   <p className="text-gray-700 line-clamp-3">{news.body}</p>
                   <button
                     onClick={() => handleReadMore(news)}
-                    className="mt-2 text-blue-600 font-semibold"
+                    className="mt-2 text-bluey font-semibold"
                   >
                     Read More
                   </button>
@@ -122,13 +122,13 @@ const NewsPage = () => {
               <div className="flex justify-between items-center p-6 border-t">
                 <button
                   onClick={handleCloseModal}
-                  className="text-red-600 font-semibold"
+                  className="text-red font-semibold"
                 >
                   Close
                 </button>
                 <button
                   onClick={() => handleShare(selectedNews)}
-                  className="text-blue-600 font-semibold"
+                  className="text-bluey font-semibold"
                 >
                   Share
                 </button>
