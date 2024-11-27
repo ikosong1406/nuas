@@ -11,6 +11,7 @@ import Leadership from "./pages/Leadership";
 import About from "./pages/About";
 import Position from "./pages/Position";
 import Contact from "./pages/Contact";
+import Login from "./pages/Login";
 
 function App() {
   const Layout1 = ({ children }) => (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/position" element={<Position />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/cc/admin" element={<Login />} />
           <Route path="/addnews" element={<NewNews />} />
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/allnews" element={<EditNews />} />

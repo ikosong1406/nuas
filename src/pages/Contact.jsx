@@ -1,17 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import cargif from "../assets/team.jpeg";
+import axios from "axios";
+import BackendApi from "../components/BackendApi";
 import {
   FaPhone,
   FaEnvelope,
   FaMapMarkerAlt,
   FaFacebook,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedin,
+  FaWhatsapp,
 } from "react-icons/fa";
 
 const Contact = () => {
+  const [contact, setContact] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
+  useEffect(() => {
+    const fetchContact = async () => {
+      try {
+        const response = await axios.get(`${BackendApi}/allContact`);
+        const fetchedData = response.data;
+
+        // Check if data is an array and set the first element
+        if (Array.isArray(fetchedData) && fetchedData.length > 0) {
+          setContact(fetchedData[0]); // Use the first object in the array
+        } else {
+          console.error("Unexpected data structure:", fetchedData);
+        }
+      } catch (error) {
+        console.error("Error fetching contact:", error);
+      }
+    };
+
+    fetchContact();
+  }, []);
   return (
     <>
       <Header>
@@ -36,7 +65,7 @@ const Contact = () => {
                 <FaPhone className="text-blue-600 text-2xl" />
                 <div>
                   <h3 className="text-lg font-semibold">Phone</h3>
-                  <p className="text-gray-600">+1 234 567 890</p>
+                  <p className="text-gray-600">{contact.phone}</p>
                 </div>
               </div>
               {/* Email */}
@@ -44,17 +73,17 @@ const Contact = () => {
                 <FaEnvelope className="text-blue-600 text-2xl" />
                 <div>
                   <h3 className="text-lg font-semibold">Email</h3>
-                  <p className="text-gray-600">contact@yourwebsite.com</p>
+                  <p className="text-gray-600">{contact.email}</p>
                 </div>
               </div>
               {/* Address */}
               <div className="flex items-center space-x-4">
                 <FaMapMarkerAlt className="text-blue-600 text-2xl" />
                 <div>
-                  <h3 className="text-lg font-semibold">Address</h3>
-                  <p className="text-gray-600">
-                    123 Luxury Ave, Downtown, Cityname
-                  </p>
+                  <h3 className="text-lg font-semibold">
+                    National Union of Andoni Students (NUAS) Worldwide
+                  </h3>
+                  <p className="text-gray-600">{contact.secretariate}</p>
                 </div>
               </div>
             </div>
@@ -67,7 +96,7 @@ const Contact = () => {
             </h2>
             <div className="flex justify-center space-x-6 text-blue-600 text-3xl">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/share/pmprjAEK1463dXc7/ "
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-bluey"
@@ -79,28 +108,10 @@ const Contact = () => {
                 href="https://twitter.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-blue-800"
+                className="text-green"
                 aria-label="Twitter"
               >
-                <FaTwitter />
-              </a>
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-800"
-                aria-label="Instagram"
-              >
-                <FaInstagram />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-800"
-                aria-label="LinkedIn"
-              >
-                <FaLinkedin />
+                <FaWhatsapp />
               </a>
             </div>
           </div>
