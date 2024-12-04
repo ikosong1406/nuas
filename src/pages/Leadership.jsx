@@ -7,6 +7,7 @@ import Header1 from "../components/Header1";
 
 const Leadership = () => {
   const [leadership, setLeadership] = useState([]);
+  const [alumni, setAlumni] = useState([]);
   const [selectedLeader, setSelectedLeader] = useState(null); // Holds the selected leader details for editing
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +23,17 @@ const Leadership = () => {
       }
     };
 
+    const fetchAlumni = async () => {
+      try {
+        const response = await axios.get(`${BackendApi}/allAlumni`);
+        setAlumni(response.data);
+      } catch (error) {
+        console.error("Error fetching position:", error);
+      }
+    };
+
     fetchLeaders();
+    fetchAlumni();
   }, []);
 
   // Open the modal and set the selected leader
@@ -111,6 +122,25 @@ const Leadership = () => {
               >
                 Edit
               </button>
+            </div>
+          ))}
+        </div>
+        <h2 className="text-2xl font-bold text-gold mb-6 mt-10">All Alumni</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {alumni.map((leader) => (
+            <div
+              key={leader.id}
+              className="bg-white p-6 rounded-lg shadow-lg text-center"
+            >
+              <img
+                src={leader.image}
+                alt={leader.name}
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+              />
+              <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                {leader.name}
+              </h3>
+              <p className="text-lg text-gray-700">{leader.position}</p>
             </div>
           ))}
         </div>

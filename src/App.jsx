@@ -11,6 +11,7 @@ import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import EditContact from "./pages/EditContact";
+import AddAlumni from "./pages/AddAlumni";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/leadership" element={<Leadership />} />
           <Route path="/allnews" element={<EditNews />} />
           <Route path="/editcontact" element={<EditContact />} />
+          <Route path="/addalumni" element={<AddAlumni />} />
         </Routes>
       </Router>
     </>

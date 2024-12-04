@@ -8,6 +8,14 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import BackendApi from "../components/BackendApi";
 import Header from "../components/Header";
+import pics1 from "../assets/001.jpg";
+import pics2 from "../assets/002.jpg";
+import pics3 from "../assets/003.jpg";
+import pics4 from "../assets/004.jpg";
+import pics5 from "../assets/005.jpg";
+import pics6 from "../assets/006.jpg";
+import pics7 from "../assets/007.jpg";
+import pics8 from "../assets/008.jpg";
 
 const Home = () => {
   const [leadership, setLeadership] = useState([]);
@@ -51,6 +59,48 @@ const Home = () => {
   const handleJoinGroup = () => {
     window.open(whatsappLink, "_blank", "noopener,noreferrer");
   };
+
+  const galleryData = [
+    {
+      image: pics1, // Replace with your actual image path
+      description:
+        "56TH NATIONAL EXECUTIVE COUNCIL WITH LM LUCKY SATURDAY ENEYO AT RCCG LIGHT HOUSE MEGA PARISH",
+    },
+    {
+      image: pics2, // Replace with your actual image path
+      description: "56TH NEC AND NUASITES AT 2024 EDUCATION AND HEALTH PROGRAM",
+    },
+    {
+      image: pics3, // Replace with your actual image path
+      description:
+        "56TH NEC AND THE SSA ON STUDENT AFFAIRS TO ANDONI LGA CHAIRMAN",
+    },
+    {
+      image: pics4, // Replace with your actual image path
+      description:
+        "56TH NEC WITH GSS NGO STUDENTS AT 2024 EDUCATION AND HEALTH PROGRAM",
+    },
+    {
+      image: pics5, // Replace with your actual image path
+      description:
+        "THE SSA ON STUDENTS AFFAIRS TO THE EXECUTIVE CHAIRMAN ANDONI LGA, PRESENTING CERTIFICATES TO WINNERS AT 2024 EDUCATION AND HEALTH PROGRAM",
+    },
+    {
+      image: pics6, // Replace with your actual image path
+      description:
+        "The 56th National Vice President, sharing gifts to Students at the 2024 Education and Health program",
+    },
+    {
+      image: pics7, // Replace with your actual image path
+      description:
+        "NEC WITH JOEL BARA, Zonal Director, Rivers State Ministry of Education Board",
+    },
+    {
+      image: pics8, // Replace with your actual image path
+      description:
+        "NEC AT COUNCIL SECRETARIATE AFTER A BRIEF MEETING WITH THE EXECUTIVE CHAIRMAN",
+    },
+  ];
 
   return (
     <Header>
@@ -173,10 +223,25 @@ const Home = () => {
           </div>
         </section>
 
-        <section id="about" className="pt-8 bg-gray-50 px-6">
+        <section id="gallery" className="pt-8 bg-gray-50 px-6">
           <div className="max-w-screen-xl mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-gold">Gallery</h2>
-            <div className="text-lg sm:text-xl text-gray-700 mb-6"></div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {galleryData.map((item, index) => (
+                <div key={index} className="bg-white shadow-lg rounded-lg">
+                  <img
+                    src={item.image}
+                    alt={item.description}
+                    className="w-full h-80 object-cover rounded-t-lg"
+                  />
+                  <div className="p-4">
+                    <p className="text-gray-700 text-lg font-semibold">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 

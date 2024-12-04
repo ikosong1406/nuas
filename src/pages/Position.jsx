@@ -6,6 +6,7 @@ import BackendApi from "../components/BackendApi";
 
 const Position = () => {
   const [leadership, setLeadership] = useState([]);
+  const [alumni, setAlumni] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -25,7 +26,17 @@ const Position = () => {
       }
     };
 
+    const fetchAlumni = async () => {
+      try {
+        const response = await axios.get(`${BackendApi}/allAlumni`);
+        setAlumni(response.data);
+      } catch (error) {
+        console.error("Error fetching position:", error);
+      }
+    };
+
     fetchLeaders();
+    fetchAlumni();
   }, []);
   return (
     <Header>
@@ -51,6 +62,30 @@ const Position = () => {
         {/* Leadership Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {leadership.map((leader, index) => (
+            <div
+              key={index}
+              className="bg-white p-6 rounded-lg shadow-lg text-center"
+            >
+              <img
+                src={leader.image}
+                alt={leader.name}
+                className="w-32 h-32 rounded-full mx-auto mb-4 object-cover"
+              />
+              <h4 className="text-xl font-semibold text-gold mb-2">
+                {leader.name}
+              </h4>
+              <p className="text-lg text-gray-700">{leader.position}</p>
+            </div>
+          ))}
+        </div>
+
+        <h3 className="text-3xl font-bold mb-4 text-gold mt-8 text-center">
+          Our Alumni
+        </h3>
+
+        {/* Leadership Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {alumni.map((leader, index) => (
             <div
               key={index}
               className="bg-white p-6 rounded-lg shadow-lg text-center"
