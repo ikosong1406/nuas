@@ -125,7 +125,9 @@ const Leadership = () => {
             </div>
           ))}
         </div>
-        <h2 className="text-2xl font-bold text-gold mb-6 mt-10">All Alumni</h2>
+        <h2 className="text-2xl font-bold text-gold mb-6 mt-10">
+          PATRON, LM and Past Leaders
+        </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {alumni.map((leader) => (
             <div

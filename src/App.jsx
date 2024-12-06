@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import EditContact from "./pages/EditContact";
 import AddAlumni from "./pages/AddAlumni";
+import AddGallery from "./pages/AddGallery";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/allnews" element={<EditNews />} />
           <Route path="/editcontact" element={<EditContact />} />
           <Route path="/addalumni" element={<AddAlumni />} />
+          <Route path="/addgallery" element={<AddGallery />} />
         </Routes>
       </Router>
     </>

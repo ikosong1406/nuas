@@ -80,7 +80,7 @@ const Position = () => {
         </div>
 
         <h3 className="text-3xl font-bold mb-4 text-gold mt-8 text-center">
-          Our Alumni
+          PATRON, LM and Past Leaders
         </h3>
 
         {/* Leadership Cards */}

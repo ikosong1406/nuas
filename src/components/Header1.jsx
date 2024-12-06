@@ -62,13 +62,6 @@ const Header1 = ({ children }) => {
               <span>Leadership</span>
             </NavLink>
             <NavLink
-              to="/editcontact"
-              className="block hover:bg-gold p-2 rounded flex items-center space-x-2 text-white text-lg font-semibold"
-              activeClassName="bg-orange"
-            >
-              <span>Edit Contact</span>
-            </NavLink>
-            <NavLink
               to="/addalumni"
               className="block hover:bg-gold p-2 rounded flex items-center space-x-2 text-white text-lg font-semibold"
               activeClassName="bg-orange"
@@ -83,11 +76,25 @@ const Header1 = ({ children }) => {
               <span>Add News</span>
             </NavLink>
             <NavLink
+              to="/addgallery"
+              className="block hover:bg-gold p-2 rounded flex items-center space-x-2 text-white text-lg font-semibold"
+              activeClassName="bg-orange"
+            >
+              <span>Add Gallery</span>
+            </NavLink>
+            <NavLink
               to="/allnews"
               className="block hover:bg-gold p-2 rounded flex items-center space-x-2 text-white text-lg font-semibold"
               activeClassName="bg-orange"
             >
-              <span>All News</span>
+              <span>Edit News</span>
+            </NavLink>
+            <NavLink
+              to="/editcontact"
+              className="block hover:bg-gold p-2 rounded flex items-center space-x-2 text-white text-lg font-semibold"
+              activeClassName="bg-orange"
+            >
+              <span>Edit Contact</span>
             </NavLink>
           </nav>
         </div>
